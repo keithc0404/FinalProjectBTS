@@ -1,0 +1,126 @@
+import random
+
+
+
+print ("Welcome to Between the Sheets!\n")
+print("Made by: Keith Coates Temple 2022\n")
+
+print("Between the Sheets is an interactive card game based off the game Acey Deucey."
+"\nThis card game shows the player two random cards.",
+"\nThe player then has the opportunity to wager.",
+"\nThe wager is based off whether the player thinks the next card shown is between the first two.",
+"\nIf the third card is between the first two cards shown, the player wins.",
+"\nIf the third card matches either of the first two cards shown,",
+"\nthe player wins double.",
+"\nAny card outside of the first two cards is considered a loser."
+"\nTwos are the lowest cards and Aces are high."
+"\nA player must opt in or out of the game by typing yes or no after each hand."
+"\nIf the player decides to not wager on a particular hand, simply enter 0 as the amount.",
+"\nYou will start with $1000 or 1000 credits.\n")
+
+
+money = 1000
+cards = {
+                1: "2",
+                2: "3",
+                3: "4",
+                4: "5",
+                5: "6",
+                6: "7",
+                7: "8",
+                8: "9",
+                9: "10",
+                10: "Jack",
+                11: "Queen",
+                12: "King",
+                13: "Ace", }
+
+
+def aceyfunction():
+    global money
+    
+    card1 = random.randint(1,13)
+    card2 = random.randint(1,13)
+    card3 = random.randint(1,13)
+
+
+    while card1 == card2:
+        card2 = random.randint(1,13)
+
+    print('\nYou have a total of {}.\n'.format(money))
+    
+
+    print('\nHere are the first two cards:\n')
+
+    print(cards[card1], " | ", cards[card2]) 
+       
+    
+
+    bet = int(input('\nHow much would you like to wager?'))
+
+    if bet == 0:
+        print("\nNo play, but if you did...\n")
+        
+    if bet <= money:
+        money = money - bet
+
+        print("\nThe next card is...\n")
+
+    else:
+        print("\nSorry, you are out of money\n")
+
+    
+
+    
+    print(cards[card3])
+    
+    
+
+    
+   
+    if card3 == card1 or card3== card2:
+                money = money + bet + bet + bet
+                print("Your card matches one of the first two shown. You win double!\n")
+       
+
+    else:
+        
+        if card1 > card2:
+            
+            if card3 < card1 and card3 > card2:
+                money = money + bet + bet
+                
+                print("Your card is between the sheets. You win!\n")
+            else: 
+               
+                print("Your card is not between the sheets. You lost your bet!\n")
+
+
+        elif card1 < card2:
+            
+            if card3 > card1 and card3 < card2:
+                
+                money = money + bet + bet
+                print("Your card is between the sheets. You win!\n")
+    
+            else: 
+               
+                print("Your card is not between the sheets. You lose your bet!\n")
+                
+while True:
+
+    
+
+    if money > 0:
+        replay = input("You have ${} in your account now. Would you like to continue playing? [yes/no]:".format(money))
+
+        if replay == "y" or replay == "yes":
+            aceyfunction()
+        else:
+            print("\nSorry, you are out of money. Goodbye.\n")
+            break
+
+    
+    else:
+        print("Sorry, you are out of money. Goodbye.")
+        break   
